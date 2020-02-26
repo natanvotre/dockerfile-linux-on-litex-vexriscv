@@ -4,17 +4,17 @@ from ubuntu:18.04
 RUN apt upgrade \
     && apt update
 
-# install python3.7
+# install python3.6
 RUN apt install -y software-properties-common \
     && add-apt-repository ppa:deadsnakes/ppa \
     && apt install -y \
-        python3.7 \
+        python3.6 \
         python3-dev \
         libyaml-dev \
-        libpython3.7-dev \
+        libpython3.6-dev \
         python3-numpy \
         python3-pip \
-    && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2 \
+    && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 2 \
     && pip3 install pyyaml
 
 # preriquisites for litex-vexriscv
