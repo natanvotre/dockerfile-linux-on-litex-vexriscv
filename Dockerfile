@@ -24,11 +24,8 @@ RUN apt install -y build-essential \
     python3-setuptools
 
 # clone linux-on-litex-vexriscv repo
-WORKDIR /home/vexriscv
-RUN git clone https://github.com/enjoy-digital/linux-on-litex-vexriscv \
-    && git clone https://github.com/enjoy-digital/linux-on-litex-vexriscv-prebuilt \
-    && cp -r linux-on-litex-vexriscv-prebuilt/* linux-on-litex-vexriscv \
-    && rm -rf linux-on-litex-vexriscv-prebuilt
+WORKDIR /home/linux-on-litex-vexriscv
+COPY linux-on-litex-vexriscv .
 
 # install litex packages
 WORKDIR /home/essential
