@@ -42,3 +42,6 @@ RUN apt install -y \
     verilator \
     libevent-dev \
     libjson-c-dev
+
+# Go to the workdir
+WORKDIR /home/linux-on-litex-vexriscv
