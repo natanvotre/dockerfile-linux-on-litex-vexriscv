@@ -11,3 +11,6 @@ litex-essential:
 	wget https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py \
 		&& chmod +x litex_setup.py \
 		&& ./litex_setup.py init
+
+install:
+	docker build -t linux-on-litex-vexriscv-3.6:latest .
