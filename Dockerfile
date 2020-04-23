@@ -24,27 +24,24 @@ RUN apt install -y build-essential \
     python3-setuptools
 
 # clone linux-on-litex-vexriscv repo
-WORKDIR /home/vexriscv
-RUN git clone https://github.com/enjoy-digital/linux-on-litex-vexriscv \
-    && git clone https://github.com/enjoy-digital/linux-on-litex-vexriscv-prebuilt \
-    && cp -r linux-on-litex-vexriscv-prebuilt/* linux-on-litex-vexriscv \
-    && rm -rf linux-on-litex-vexriscv-prebuilt
+WORKDIR /home/linux-on-litex-vexriscv
+COPY linux-on-litex-vexriscv .
 
 # install litex packages
-WORKDIR /home/essential
-RUN wget https://raw.githubusercontent.com/enjoy-digital/litex/master/litex_setup.py \
-    && chmod +x litex_setup.py \
-    && ./litex_setup.py init \
-    && ./litex_setup.py install
+WORKDIR /home/litex-essential
+COPY litex-essential .
+RUN ./litex_setup.py install
 
-# install litex packages
-WORKDIR /home
-RUN wget https://static.dev.sifive.com/dev-tools/riscv64-unknown-elf-gcc-8.1.0-2019.01.0-x86_64-linux-ubuntu14.tar.gz \
-    && tar -xvf riscv64-unknown-elf-gcc-8.1.0-2019.01.0-x86_64-linux-ubuntu14.tar.gz \
-    && echo 'export PATH=$PATH:$PWD/riscv64-unknown-elf-gcc-8.1.0-2019.01.0-x86_64-linux-ubuntu14/bin/' >> ~/.bashrc
+# Add riscv toolchain
+WORKDIR /home/riscv-gcc
+COPY riscv-gcc .
+RUN echo 'export PATH=$PATH:/home/riscv-gcc/riscv64-unknown-elf-gcc-8.1.0-2019.01.0-x86_64-linux-ubuntu14/bin/' >> ~/.bashrc
 
 # install verilator
 RUN apt install -y \
     verilator \
     libevent-dev \
     libjson-c-dev
+
+# Go to the workdir
+WORKDIR /home/linux-on-litex-vexriscv

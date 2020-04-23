@@ -1,0 +1,3 @@
+[submodule "linux-on-litex-vexriscv"]
+	path = linux-on-litex-vexriscv
+	url = https://github.com/enjoy-digital/linux-on-litex-vexriscv
